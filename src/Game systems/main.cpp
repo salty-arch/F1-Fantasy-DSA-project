@@ -104,21 +104,54 @@ int main() {
 
                 cout << "Enter your budget (in millions): ";
                 cin >> budget;
+                float usedbudget = 0.0;
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-                Constructors chosenConstructor = SelectConstructor(constructors);
+                Constructors chosenConstructor;
+                int i = 0;
+                while (i < 1) {
+                    chosenConstructor = SelectConstructor(constructors);
+                    if (usedbudget + chosenConstructor.getPrice() > budget) {
+                        cout << "Budget Exceeded. Choose another team\n";
+                    }
+                    else {
+                        usedbudget += chosenConstructor.getPrice();
+                        cout << "Constructor Selected.\n";
+                        cout << "Remaining Budget: " << budget - usedbudget << "M\n";
+                        i++;
+                    }
+                }
+
                 Team userTeam(budget, chosenConstructor);
 
                 int maxDrivers = 2;
-
-                for (int i = 0; i < maxDrivers; ++i) {
+                int currentDrivers = 0;
+                while (currentDrivers < maxDrivers) {
                     Driver d = SelectDriver(drivers);
-                    userTeam.addDriver(d);
-                    cout << d.getName() << " added to your team!\n";
+                    bool found = false;
+                    for (Driver existingdriver : userTeam.getDrivers()) {
+                        if (d.getName() == existingdriver.getName()) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (usedbudget + d.getPrice() > budget) {
+                        cout << "Exceeding Budget\n";
+                    }
+                    else if (found) {
+                        cout << "Driver already present in team\n";
+                    }
+                    else {
+                        userTeam.addDriver(d);
+                        cout << d.getName() << " added to your team!\n";
+                        usedbudget += d.getPrice();
+                        cout << "Remaining Budget: " << budget - usedbudget << "M\n";
+                        currentDrivers++;
+                    }
                 }
 
-                // Create new user and add to loaded users vector
-                User* user = new User(username, budget, userTeam);
+                User* user;
+                user = new User(username, budget, userTeam);
                 loadedUsers.push_back(user);
 
                 vector<Driver> teamDrivers = userTeam.getDrivers();
@@ -337,7 +370,7 @@ int main() {
                             // Track performance for each driver
                             vector<RaceResult> results = race.getResults();
 
-                            // NEW: Update user points based on their drivers' performance
+                            // Update user points based on their drivers' performance
                             cout << "\n Updating user points based on driver performance..." << endl;
                             int usersUpdated = 0;
                             for (User* user : loadedUsers) {
