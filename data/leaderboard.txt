@@ -1,7 +1,6 @@
 === F1 FANTASY LEAGUE LEADERBOARD ===
 Total Players: 12
 Average Points: 75
-Generated: [Current Date/Time]
 
 Rank,Username,Points,Budget
 1,ahmad,130,300

@@ -1,11 +1,11 @@
 code,name,team,points,price,avgFinishes,wins,podiums
-HAM,Lewis Hamilton,Mercedes,443,25.5,0,0,0
-VER,Max Verstappen,Red Bull,207,27,0,0,0
-LEC,Charles Leclerc,Ferrari,293,24,0,0,0
-SAI,Carlos Sainz,Ferrari,245,22.5,0,0,0
-RUS,George Russell,Mercedes,231,23,0,0,0
-NOR,Lando Norris,McLaren,213,20,0,0,0
-PER,Sergio Perez,Red Bull,214,22,0,0,0
-TSU,Yuki Tsunoda,AlphaTauri,189,15,0,0,0
-OCO,Esteban Ocon,Alpine,220,16.5,0,0,0
-BOT,Valtteri Bottas,Alfa Romeo,88,14,0,0,0
+HAM,Lewis Hamilton,Mercedes,550,25.5,0,0,0
+VER,Max Verstappen,Red Bull,280,27,0,0,0
+LEC,Charles Leclerc,Ferrari,365,24,0,0,0
+SAI,Carlos Sainz,Ferrari,307,22.5,0,0,0
+RUS,George Russell,Mercedes,276,23,0,0,0
+NOR,Lando Norris,McLaren,260,20,0,0,0
+PER,Sergio Perez,Red Bull,242,22,0,0,0
+TSU,Yuki Tsunoda,AlphaTauri,230,15,0,0,0
+OCO,Esteban Ocon,Alpine,244,16.5,0,0,0
+BOT,Valtteri Bottas,Alfa Romeo,99,14,0,0,0

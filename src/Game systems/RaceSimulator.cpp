@@ -37,16 +37,16 @@ void RaceSimulator::runRace() {
     cout << "========================================" << endl;
     cout << "Starting race simulation..." << endl;
 
-    // Step 1: Simulate race positions
+    //  Simulate race positions
     simulateRacePositions();
 
-    // Step 2: Apply random events (penalties, DNF, etc.)
+    //  Apply random events (penalties, DNF, etc.)
     applyRandomEvents();
 
-    // Step 3: Assign fastest lap
+    //  Assign fastest lap
     assignFastestLap();
 
-    // Step 4: Calculate points
+    //  Calculate points
     calculatePoints();
 
     cout << "Race completed!" << endl;
@@ -183,7 +183,7 @@ void RaceSimulator::displayResults() {
              << setw(2) << right << result.pointsEarned;
 
         if (result.fastestLap) {
-            cout << " 🏁";
+            cout << " ";
         }
         cout << endl;
     }
@@ -215,7 +215,7 @@ void RaceSimulator::displayDetailedResults() {
     // Fastest lap
     for (const RaceResult& result : raceResults) {
         if (result.fastestLap) {
-            cout << "\n🏁 Fastest Lap: " << result.driver->getName() << endl;
+            cout << "\n Fastest Lap: " << result.driver->getName() << endl;
             break;
         }
     }

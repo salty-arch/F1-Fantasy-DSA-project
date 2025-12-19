@@ -24,7 +24,6 @@ void Leaderboard::addUser(User* user) {
 
     // Check if user already exists
     if (users.find(username) != users.end()) {
-        cout << "User '" << username << "' already exists in leaderboard!" << endl;
         return;
     }
 
@@ -57,8 +56,7 @@ bool Leaderboard::userExists(const string& username) {
 void Leaderboard::updateUserPoints(const string& username, int points) {
     User* user = getUser(username);
     if (user != nullptr) {
-        // This would require adding a setPoints method to User class
-        // For now, we'll just rebuild rankings
+        // rebuild rankings
         rebuildRankings();
     }
 }
@@ -238,10 +236,6 @@ void Leaderboard::displayUserStats(const string& username) {
 
 bool Leaderboard::exportToFile(const string& filename) {
     ofstream file(filename);
-    if (!file.is_open()) {
-        cout << "Failed to open file: " << filename << endl;
-        return false;
-    }
 
     rebuildRankings();
 
@@ -249,7 +243,6 @@ bool Leaderboard::exportToFile(const string& filename) {
     file << "=== F1 FANTASY LEAGUE LEADERBOARD ===" << endl;
     file << "Total Players: " << getTotalUsers() << endl;
     file << "Average Points: " << getAveragePoints() << endl;
-    file << "Generated: [Current Date/Time]" << endl;
     file << "\nRank,Username,Points,Budget" << endl;
 
     // Data
@@ -265,12 +258,6 @@ bool Leaderboard::exportToFile(const string& filename) {
     return true;
 }
 
-bool Leaderboard::loadFromFile(const string& filename) {
-    // Implementation for loading leaderboard from file
-    // This would require storing complete user data
-    cout << "Load from file not yet implemented" << endl;
-    return false;
-}
 
 // ============ UTILITY ============
 

@@ -12,10 +12,6 @@ using namespace std;
 
 class SortingUtils {
 public:
-    // Merge Sort implementations
-    static void mergeSortDriversByPoints(vector<Driver>& drivers);
-    static void mergeSortDriversByPrice(vector<Driver>& drivers);
-    static void mergeSortDriversByAvgFinish(vector<Driver>& drivers);
 
     // Quick Sort implementations
     static void quickSortDriversByPoints(vector<Driver>& drivers);

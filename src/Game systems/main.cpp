@@ -53,7 +53,7 @@ int main() {
 
     cout << "Loaded " << drivers.size() << " drivers with their points from CSV." << endl;
 
-    // NEW: Load users from CSV
+    // Load users from CSV
     vector<User*> loadedUsers = LoadUsersFromCSV("../data/users.csv", drivers, constructors);
     cout << "Loaded " << loadedUsers.size() << " users from CSV." << endl;
 
@@ -76,7 +76,7 @@ int main() {
     // After building Trie, add:
     Leaderboard leaderboard;
 
-    // NEW: Populate leaderboard with loaded users
+    //Populate leaderboard with loaded users
     for (User* user : loadedUsers) {
         leaderboard.addUser(user);
     }
@@ -188,52 +188,6 @@ int main() {
                 displayAVLMenu(avlTree);
                 break;
             case 4: {
-                // Update driver points
-                cout << "\n=== UPDATE DRIVER POINTS ===" << endl;
-
-                string code;
-                cout << "Enter driver code: ";
-                getline(cin, code);
-
-                // Find driver in vector
-                bool found = false;
-                for (Driver& d : drivers) {
-                    if (d.getCode() == code) {
-                        int points;
-                        cout << "Current points: " << d.getPoints() << endl;
-                        cout << "Enter points to add: ";
-                        cin >> points;
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-                        d.addpoints(points);
-                        cout << "New points: " << d.getPoints() << endl;
-
-                        // Update CSV file
-                        if (UpdateDriversCSV("../data/drivers.csv", drivers)) {
-                            cout << " Points updated in CSV file!" << endl;
-                        } else {
-                            cout << " Failed to update CSV file!" << endl;
-                        }
-
-                        // Rebuild AVL tree
-                        cout << "Rebuilding AVL tree..." << endl;
-                        avlTree.clear();
-                        for (Driver& dr : drivers) {
-                            avlTree.insert(dr);
-                        }
-                        cout << "AVL tree updated!" << endl;
-
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found) {
-                    cout << "Driver not found!" << endl;
-                }
-                break;
-            }
-            case 5: {
                 // Trie Search Menu
                 int searchChoice;
                 do {
@@ -335,7 +289,7 @@ int main() {
                 } while (searchChoice != 4);
                 break;
             }
-            case 6: {
+            case 5: {
                 // Race Simulation
                 int raceChoice;
                 do {
@@ -514,7 +468,7 @@ int main() {
 
                                 // Save to CSV
                                 if (UpdateUsersCSV("../data/users.csv", loadedUsers)) {
-                                    cout << " User points saved to CSV!" << endl;
+                                    cout << " User points saved to CSV" << endl;
                                 }
                             } else {
                                 cout << "ℹ  No users had drivers in this race" << endl;
@@ -522,9 +476,9 @@ int main() {
 
                             // Update CSV after race
                             if (UpdateDriversCSV("../data/drivers.csv", drivers)) {
-                                cout << " Driver points updated in CSV file!" << endl;
+                                cout << " Driver points updated in CSV file" << endl;
                             } else {
-                                cout << " Failed to update CSV file!" << endl;
+                                cout << " Failed to update CSV file" << endl;
                             }
 
                             // Rebuild AVL tree
@@ -577,7 +531,7 @@ int main() {
                                 // Track performance for each driver in this race
                                 vector<RaceResult> results = race.getResults();
 
-                                // NEW: Update user points based on their drivers' performance
+                                // Update user points based on their drivers' performance
                                 for (User* user : loadedUsers) {
                                     int userPointsGained = 0;
                                     vector<Driver> userDrivers = user->getTeam().getDrivers();
@@ -653,11 +607,11 @@ int main() {
                 } while (raceChoice != 4);
                 break;
             }
-            case 7:
-                // NEW: Leaderboard Menu
+            case 6:
+                //Leaderboard Menu
                 displayLeaderboardMenu(leaderboard, loadedUsers);
                 break;
-            case 8:
+            case 7:
                 cout << "\n========================================" << endl;
                 cout << "  Thanks for playing F1 Fantasy League!" << endl;
                 cout << "========================================" << endl;
@@ -666,7 +620,7 @@ int main() {
 
                 UpdateUsersCSV("../data/users.csv", loadedUsers);
 
-                // Clean up dynamically allocated users
+                // Clean up users
                 for (User* user : loadedUsers) {
                     delete user;
                 }
@@ -691,15 +645,14 @@ void displayMainMenu() {
     cout << "1. Create New Fantasy Team" << endl;
     cout << "2. Driver Rankings (QuickSort)" << endl;
     cout << "3. Driver Rankings (AVL Tree)" << endl;
-    cout << "4. Update Driver Points" << endl;
-    cout << "5. Search Drivers (Trie)" << endl;
-    cout << "6. Simulate Race" << endl;
-    cout << "7. Leaderboard" << endl;
-    cout << "8. Exit" << endl;
-    cout << "========================================" << endl;
+    cout << "4. Search Drivers (Trie)" << endl;
+    cout << "5. Simulate Race" << endl;
+    cout << "6. Leaderboard" << endl;
+    cout << "7. Exit" << endl;
+    cout << "====1`====================================" << endl;
 }
 
-// SIMPLIFIED AVL MENU (from 8 options to 4)
+// AVL MENU
 void displayAVLMenu(AVLTree& avlTree) {
     int choice;
     do {
@@ -767,7 +720,7 @@ void displayAVLMenu(AVLTree& avlTree) {
     } while (choice != 4);
 }
 
-// SIMPLIFIED SORTING MENU (from 8 options to 5)
+// SORTING MENU
 void displaySortingMenu(vector<Driver>& drivers, vector<Constructors>& constructors) {
     int choice;
     do {
@@ -851,7 +804,7 @@ void displaySortingMenu(vector<Driver>& drivers, vector<Constructors>& construct
     } while (choice != 5);
 }
 
-// NEW: LEADERBOARD MENU (with CSV support)
+// LEADERBOARD MENU
 void displayLeaderboardMenu(Leaderboard& leaderboard, vector<User*>& loadedUsers) {
     int choice;
     do {

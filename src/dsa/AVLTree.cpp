@@ -47,7 +47,7 @@ AVLNode* AVLTree::updateHeight(AVLNode* node) {
 // Right Rotation (LL Case)
 //       y                    x
 //      / \                  / \
-//     x   C    ------>     A   y
+//     x   C    ----- >     A   y
 //    / \                      / \
 //   A   B                    B   C
 AVLNode* AVLTree::rotateRight(AVLNode* y) {
@@ -93,7 +93,7 @@ void AVLTree::insert(const Driver& driver) {
 }
 
 AVLNode* AVLTree::insertNode(AVLNode* node, const Driver& driver) {
-    // 1. Perform normal BST insertion
+    // Perform normal BST insertion
     if (node == nullptr) {
         return new AVLNode(driver);
     }
@@ -181,13 +181,6 @@ void AVLTree::inOrderTraversal(AVLNode* node, vector<Driver>& result) {
     inOrderTraversal(node->right, result);
 }
 
-void AVLTree::reverseInOrderTraversal(AVLNode* node, vector<Driver>& result) {
-    if (node == nullptr) return;
-
-    reverseInOrderTraversal(node->right, result);
-    result.push_back(node->driver);
-    reverseInOrderTraversal(node->left, result);
-}
 
 vector<Driver> AVLTree::getDriversByPointsDescending() {
     vector<Driver> result;
@@ -195,11 +188,6 @@ vector<Driver> AVLTree::getDriversByPointsDescending() {
     return result;
 }
 
-vector<Driver> AVLTree::getDriversByPointsAscending() {
-    vector<Driver> result;
-    reverseInOrderTraversal(root, result);
-    return result;
-}
 
 vector<Driver> AVLTree::getTopNDrivers(int n) {
     vector<Driver> allDrivers = getDriversByPointsDescending();
@@ -235,41 +223,6 @@ void AVLTree::clear() {
 
 // ============ DISPLAY METHODS ============
 
-void AVLTree::displayTreeStructure() {
-    if (root == nullptr) {
-        cout << "Tree is empty!" << endl;
-        return;
-    }
-
-    cout << "\n=== AVL TREE STRUCTURE ===" << endl;
-    cout << "(Format: Driver Code - Points [Height, Balance])" << endl;
-    displayTree(root, 0, false);
-    cout << endl;
-}
-
-void AVLTree::displayTree(AVLNode* node, int indent, bool isRight) {
-    if (node == nullptr) return;
-
-    // Display right subtree first (top of visual tree)
-    if (node->right != nullptr) {
-        displayTree(node->right, indent + 4, true);
-    }
-
-    // Display current node
-    for (int i = 0; i < indent; i++) cout << " ";
-    if (indent > 0) {
-        cout << (isRight ? "┌── " : "└── ");
-    }
-
-    int balance = getBalanceFactor(node);
-    cout << node->driver.getCode() << " - " << node->driver.getPoints()
-         << " [H:" << node->height << ", B:" << balance << "]" << endl;
-
-    // Display left subtree (bottom of visual tree)
-    if (node->left != nullptr) {
-        displayTree(node->left, indent + 4, false);
-    }
-}
 
 void AVLTree::displayRankings() {
     if (isEmpty()) {

@@ -23,11 +23,11 @@ void SortingUtils::quickSortByPoints(vector<Driver>& drivers, int low, int high)
 int SortingUtils::partitionByPoints(vector<Driver>& drivers, int low, int high) {
     // Choose FIRST element as pivot (was: drivers[high])
     int pivot = drivers[low].getPoints();
-    int i = high + 1;  // Changed: Start from high+1 (reverse direction)
+    int i = high + 1;  // Start from high+1 (reverse direction)
 
     for (int j = high; j > low; j--) {  // Changed: Iterate from high down to low+1
         // Descending order (>= instead of <=)
-        if (drivers[j].getPoints() <= pivot) {  // Changed: <= because we're moving from right
+        if (drivers[j].getPoints() <= pivot) {  // <= because we're moving from right
             i--;
             swap(drivers[i], drivers[j]);
         }
@@ -56,11 +56,11 @@ void SortingUtils::quickSortByPrice(vector<Driver>& drivers, int low, int high) 
 int SortingUtils::partitionByPrice(vector<Driver>& drivers, int low, int high) {
     // Choose FIRST element as pivot (was: drivers[high])
     float pivot = drivers[low].getPrice();
-    int i = high + 1;  // Changed: Start from high+1
+    int i = high + 1;  // Start from high+1
 
-    for (int j = high; j > low; j--) {  // Changed: Iterate from high down to low+1
+    for (int j = high; j > low; j--) {  // Iterate from high down to low+1
         // Ascending order
-        if (drivers[j].getPrice() >= pivot) {  // Changed: >= because we're moving from right
+        if (drivers[j].getPrice() >= pivot) {  // >= because we're moving from right
             i--;
             swap(drivers[i], drivers[j]);
         }
